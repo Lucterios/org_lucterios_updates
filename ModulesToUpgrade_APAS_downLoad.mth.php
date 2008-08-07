@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2008 23:26:30 By  ---
+// --- Last modification: Date 05 August 2008 22:57:18 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -28,7 +28,7 @@ require_once('CORE/extension_params.tbl.php');
 require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 //@TABLES@
 
-//@DESC@téléchargement d'un module
+//@DESC@telechargement d un module
 //@PARAM@ 
 
 function ModulesToUpgrade_APAS_downLoad(&$self)
@@ -36,6 +36,21 @@ function ModulesToUpgrade_APAS_downLoad(&$self)
 //@CODE_ACTION@
 if ($self->etat==2)
 {
+	require_once "CORE/extensionManager.inc.php";
+	$is_client=($self->famille=='client');
+	$dir_module=Extension::getFolder($self->module,'',$is_client);
+	if (is_dir($dir_module))
+		$canBeWrite=is_writable($dir_module);
+	else {
+		$path_parts = pathinfo($dir_module);
+		$canBeWrite=is_writable($path_parts['dirname']);
+	}
+	if (!$canBeWrite) {
+		$self->etat=4;
+		$self->update();
+		return "Erreur : manque droit d'écriture";
+	}
+
 	$params=new DBObj_CORE_extension_params;
 	$param_val=$params->getParameters('org_lucterios_updates');
 	$guid=$param_val['GUID'];
@@ -82,7 +97,7 @@ if ($self->etat==2)
 			$tar_object->extractList("CORE/setup.inc.php",$dir,"CORE");
 		else	if ($self->famille=='client')
 			$tar_object->extractList("setup.inc.php",$dir);
-		else	
+		else
 			$tar_object->extractList("/setup.inc.php",$dir);
 		if (!is_file($dir."setup.inc.php"))
 		{
@@ -105,6 +120,8 @@ if ($self->etat==2)
 			unlink($dir.$self->module."_setup.inc.php");
 			return "Erreur : mauvaise version";
 		}
+
+
 	}
 	$self->etat=3;
 	$self->update();

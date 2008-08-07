@@ -1,6 +1,24 @@
 <?php
-// setup file write by SDK tool
-// --- Last modification: Date 05 June 2008 23:25:04 By  ---
+// 
+//     This file is part of Lucterios.
+// 
+//     Lucterios is free software; you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation; either version 2 of the License, or
+//     (at your option) any later version.
+// 
+//     Lucterios is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+// 
+//     You should have received a copy of the GNU General Public License
+//     along with Lucterios; if not, write to the Free Software
+//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// 
+// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+//  // setup file write by SDK tool
+// --- Last modification: Date 05 August 2008 22:57:18 By  ---
 
 $extention_name="org_lucterios_updates";
 $extention_description="Modules gérant le téléchargement et l'installation d'autres extensions.{[newline]}Il utilise au mieux plusieurs serveurs de mise à jours et gére les dépendances entre les modules.";
@@ -12,7 +30,7 @@ $extension_libre=true;
 $version_max=0;
 $version_min=15;
 $version_release=70;
-$version_build=44;
+$version_build=58;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 17, 0, 14, false);
@@ -30,7 +48,7 @@ $actions=array();
 $actions[0] = new Param_Action("Module à télécharger", "ModulesToUpgrade_APAS_ATelecharger", 2);
 $actions[1] = new Param_Action("Supprimer un module à mettre à jours", "ModulesToUpgrade_APAS_Del", 2);
 $actions[2] = new Param_Action("Fiche d'un module à mettre à jours", "ModulesToUpgrade_APAS_Fiche", 2);
-$actions[3] = new Param_Action("Cycle d'installation des mise à jours", "ModulesToUpgrade_APAS_Installation", 2);
+$actions[3] = new Param_Action("Cycle d installation des mise a jours", "ModulesToUpgrade_APAS_Installation", 2);
 $actions[4] = new Param_Action("Installer les module télécharger", "ModulesToUpgrade_APAS_Installer", 2);
 $actions[5] = new Param_Action("Lister des modules à mettre à jours", "ModulesToUpgrade_APAS_List", 2);
 $actions[6] = new Param_Action("Rafraichir la liste des modules à mettre à jours", "ModulesToUpgrade_APAS_Rafraichir", 2);

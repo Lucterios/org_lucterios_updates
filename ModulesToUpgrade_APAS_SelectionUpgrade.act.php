@@ -74,13 +74,17 @@ if ($res) {
 			if ($module->nouveau!=$Current_Nouveau)
 			{
 				$Current_Nouveau=$module->nouveau;
-				$lbl=new Xfer_Comp_LabelForm("Nouveau_".$Current_Nouveau);
+				if ($Current_Nouveau=='n')
+					$xfer_result->newTab("Modules à mettre à jours");
+				else
+					$xfer_result->newTab("Nouveaux modules");
+				/*$lbl=new Xfer_Comp_LabelForm("Nouveau_".$Current_Nouveau);
 				$lbl->setLocation(0,$PosY++,4);
 				if ($Current_Nouveau=='n')
 					$lbl->setValue('{[center]}{[underline]}Modules à mettre à jours{[/underline]}{[/center]}');
 				else
 					$lbl->setValue('{[center]}{[underline]}Nouveaux modules{[/underline]}{[/center]}');
-				$xfer_result->addComponent($lbl);
+				$xfer_result->addComponent($lbl);*/
 			}
 
 			$check=new Xfer_Comp_Check($module->module);

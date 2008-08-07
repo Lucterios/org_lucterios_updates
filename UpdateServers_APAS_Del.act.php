@@ -56,8 +56,11 @@ $xfer_result->m_context['ORIGINE']="UpdateServers_APAS_Del";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;
 //@CODE_ACTION@
-if($xfer_result->confirme("Etes vous sûre de vouloir supprimer ce serveur de mise à jours?"))
+if($xfer_result->confirme("Etes vous sûre de vouloir supprimer ce serveur de mise à jours?")) {
 	$self->delete();
+	$UpdateServer=new DBObj_org_lucterios_updates_UpdateServers;
+	$UpdateServer->clearDateUpdate();
+}
 //@CODE_ACTION@
 	$xfer_result->setCloseAction(new Xfer_Action('unlock','','CORE','UNLOCK',FORMTYPE_MODAL,CLOSE_YES,SELECT_NONE));
 	$connect->commit();

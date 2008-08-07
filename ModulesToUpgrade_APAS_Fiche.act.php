@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 02 March 2008 12:42:46 By  ---
+// --- Last modification: Date 01 March 2008 16:36:56 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -32,7 +32,6 @@ require_once('CORE/xfer_custom.inc.php');
 
 
 //@DESC@Fiche d'un module à mettre à jours
-//@PARAM@ 
 //@INDEX:module
 
 
@@ -47,7 +46,7 @@ if ($module>=0) $self->get($module);
 $self->lockRecord("ModulesToUpgrade_APAS_Fiche");
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_Fiche",$Params);
-$xfer_result->Caption="Fiche d'un module à mettre à jours";
+$xfer_result->Caption='Fiche d'un module à mettre à jours';
 $xfer_result->m_context['ORIGINE']="ModulesToUpgrade_APAS_Fiche";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;
@@ -65,6 +64,10 @@ $xfer_result->addAction(new Xfer_Action("_Fermer", "close.png"));
 	throw $e;
 }
 return $xfer_result;
+}
+
+?>
+ult;
 }
 
 ?>
