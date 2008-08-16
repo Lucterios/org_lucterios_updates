@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 05 August 2008 22:03:42 By  ---
+// --- Last modification: Date 13 August 2008 22:10:14 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -137,7 +137,7 @@ $lbl_err->setSize(50,750);
 $xfer_result->addComponent($lbl_err);
 $text = 'Téléchargement des modules';
 if($change_status)$text = 'Installation des modules';
-if($status == 3)$text = 'Téléchargement et installation terminer';
+if($status == 3)$text = 'Téléchargement et installation terminés';
 $btn = new Xfer_Comp_Button("Next");
 $btn->setLocation(0,$PosY+10,5);
 $btn->setAction($self->NewAction($text,'','Installation', FORMTYPE_REFRESH, CLOSE_NO));
