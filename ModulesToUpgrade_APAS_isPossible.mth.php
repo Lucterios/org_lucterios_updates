@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 March 2008 19:51:47 By  ---
+// --- Last modification: Date 29 August 2008 23:40:15 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -70,7 +70,7 @@ if ($res && ($self->famille!='')) {
 	{
 		$ext=new Extension($extName,$extDir);
 		//echo "<!-- ext=".$ext->Name." - Fam=".$ext->famille." -->\n";
-		if (($ext->Name!=$self->module) && ($ext->famille==$self->famille))
+		if (($self->famille!='applis') && ($ext->Name!=$self->module) && ($ext->famille==$self->famille))
 		{
 			$res=false;
 			foreach($depents as $depent)
@@ -82,6 +82,7 @@ if ($res && ($self->famille!='')) {
 		}
 	}
 }
+//echo "<!-- ### module=".$self->module." - famille=".$self->famille." deps=".print_r($depents,true)." ==> IsPossible=$res -->\n";
 return $res;
 //@CODE_ACTION@
 }

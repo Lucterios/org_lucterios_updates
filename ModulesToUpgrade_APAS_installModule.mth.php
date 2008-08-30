@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 March 2008 21:16:16 By  ---
+// --- Last modification: Date 30 August 2008 0:03:30 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -49,7 +49,11 @@ try
 		$lpk_file=$dir_usr.$modules->module.".lpk";
 		if (is_file($lpk_file) && $modules->isPossible()) {
 			$is_client=($modules->famille=='client');
-			$dir_module=Extension::getFolder($modules->module,'',$is_client);
+			if ($modules->famille=='applis')
+				$module_name='applis';
+			else
+				$module_name=$modules->module;
+			$dir_module=Extension::getFolder($module_name,'',$is_client);
 			$ext_backup=$dir_usr.$modules->module;
 			if(is_dir($dir_module) && !$is_client && ($modules->module!='SDK'))
 				rename($dir_module,$ext_backup);
@@ -62,7 +66,7 @@ try
 				$res=$tar_object->extract($dir_module);
 			if (!PEAR::isError($res))
 			{
-				$extlist[]=array($modules->module,!$is_client);
+				$extlist[]=array($module_name,!$is_client);
 				$modules->etat=5;
 				$modules->update();
 			} else {
