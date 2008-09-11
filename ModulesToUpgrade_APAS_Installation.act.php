@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 13 August 2008 22:10:14 By  ---
+// --- Last modification: Date 10 September 2008 22:00:42 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -72,8 +72,10 @@ case 0:
 	$module->etat = 0;
 	$module->find();
 	while($module->fetch())if($Params[$module->module] == 'o') {
-		$module->etat = 1;
-		$module->update();
+		$module_upgrades = new DBObj_org_lucterios_updates_ModulesToUpgrade;
+		$module_upgrades->get($module->id);
+		$module_upgrades->etat = 1;
+		$module_upgrades->update();
 	}
 	$xfer_result->m_context = array('status' => 1);
 	break;
@@ -91,8 +93,10 @@ case 1:
 	$module->etat = 1;
 	$module->find();
 	if($module->fetch()) {
-		$module->etat = 2;
-		$module->update();
+		$module_upgrades = new DBObj_org_lucterios_updates_ModulesToUpgrade;
+		$module_upgrades->get($module->id);
+		$module_upgrades->etat = 2;
+		$module_upgrades->update();
 		$change_status = false;
 	}
 	if($change_status)$xfer_result->m_context['status'] = 2;

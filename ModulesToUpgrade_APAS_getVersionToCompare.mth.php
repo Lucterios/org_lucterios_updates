@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2008 22:48:02 By  ---
+// --- Last modification: Date 11 September 2008 19:16:18 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -38,7 +38,9 @@ if ($self->nouveau=='n')
 {
 	require_once "CORE/extensionManager.inc.php";
 	$is_client=($self->famille=='client');
-	$ext=new Extension($self->module,Extension::getFolder($self->module,'',$is_client));
+	$module=$self->module;
+	if ($self->famille=='applis') $module='applis';
+	$ext=new Extension($module,Extension::getFolder($module,'',$is_client));
 	if ($is_client)
 		$vers=$ext->getPHPVersion();
 	else

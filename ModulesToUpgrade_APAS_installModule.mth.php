@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 30 August 2008 0:03:30 By  ---
+// --- Last modification: Date 11 September 2008 0:17:52 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -76,24 +76,10 @@ try
 			}
 		}
 	}
-	$install='';
-	$set_of_ext=array();
-	foreach($extlist as $name)
-		if ($name[1])
-			$set_of_ext[]=new Extension($name[0],Extension::getFolder($name[0]));
-	$set_of_ext=sortExtension($set_of_ext,"");
-	$ExtensionDescription=array();
-	foreach($set_of_ext as $ext)
-	{
-		$install.="{[center]}{[bold]}".$ext->Name."{[/bold]}{[/center]}";
-		$ExtensionDescription[$ext->Name]=$ext->getVersions();
-		$ext->installComplete();
-		$install.=$ext->message;
-	}
-	$install.=Extension::callApplicationPostInstallation($ExtensionDescription);
-	echo "<!-- install=$install - ext=".print_r($ExtensionDescription,true)." -->\n";
+	$install=refreshDataBase(true);
+	logAutre($install);
 	$connect->commit();
-	return array($ExtensionDescription,$install);
+	return array($extlist,$install);
 } catch (Exception $e) {
 	$connect->rollback();
 	$dh = opendir($dir_usr);
