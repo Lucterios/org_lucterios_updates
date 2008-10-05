@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 29 August 2008 23:40:36 By  ---
+// --- Last modification: Date 04 October 2008 11:33:56 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -49,6 +49,8 @@ if(($Rep!==false) && (count($Rep)>0))
 	$p->setInputString($Response);
 	$p->parse();
 	$LIST = $p->getResult();
+	if (get_class($LIST)!='XmlElement')
+		return false;
 	$Extension_childs = $LIST->getChildsByTagName("MODULE");
 	//echo "<!-- updateserver=$updateserver - Response=$Response - NB=".count($Extension_childs)." -->\n";
 	foreach($Extension_childs as $Extension_child)
