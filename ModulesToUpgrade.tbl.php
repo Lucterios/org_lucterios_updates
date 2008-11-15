@@ -18,18 +18,21 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 05 March 2008 18:39:54 By  ---
+// --- Last modification: Date 15 November 2008 12:47:23 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
 class DBObj_org_lucterios_updates_ModulesToUpgrade extends DBObj_Basic
 {
+	var $Title="";
 	var $tblname="ModulesToUpgrade";
 	var $extname="org_lucterios_updates";
 	var $__table="org_lucterios_updates_ModulesToUpgrade";
 
 	var $DefaultFields=array();
 	var $NbFieldsCheck=1;
+	var $Heritage="";
+	var $PosChild=-1;
 
 	var $module;
 	var $etat;

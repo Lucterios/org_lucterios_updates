@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 04 October 2008 11:33:56 By  ---
+// --- Last modification: Date 15 November 2008 12:49:11 By  ---
 
 $extention_name="org_lucterios_updates";
 $extention_description="Modules gérant le téléchargement et l'installation d'autres extensions.{[newline]}Il utilise au mieux plusieurs serveurs de mise à jours et gére les dépendances entre les modules.";
@@ -29,8 +29,8 @@ $extension_libre=true;
 
 $version_max=0;
 $version_min=15;
-$version_release=75;
-$version_build=2;
+$version_release=80;
+$version_build=1;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 17, 0, 14, false);
@@ -64,7 +64,7 @@ $params["GUID"] = new Param_Parameters("GUID", "", "GUID", 0, array('Multi'=>fal
 $params["DateLastRefresh"] = new Param_Parameters("DateLastRefresh", "", "Date/Heure dernière lecture serveur", 0, array('Multi'=>false));
 
 $extend_tables=array();
-$extend_tables["ModulesToUpgrade"] = array("org_lucterios_updates.ModulesToUpgrade","");
-$extend_tables["UpdateServers"] = array("org_lucterios_updates.UpdateServers","");
+$extend_tables["ModulesToUpgrade"] = array("org_lucterios_updates.ModulesToUpgrade","",array("org_lucterios_updates_UpdateServers"=>"serveur",));
+$extend_tables["UpdateServers"] = array("org_lucterios_updates.UpdateServers","",array());
 
 ?>
