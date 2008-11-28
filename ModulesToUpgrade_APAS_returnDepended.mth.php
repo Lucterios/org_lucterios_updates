@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 03 March 2008 0:42:32 By  ---
+// --- Last modification: Date 28 November 2008 12:13:57 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -50,12 +50,13 @@ while ($mod->fetch())
 			$versMax=$depent[1];
 			$versMin=$depent[2];
 			$res=((version_compare($versMod,$versMax)<=0) && (version_compare($versMod,$versMin)>=0));
-			if ($res && ($depent[3]=='o'))
+			/*if ($res && ($depent[3]=='o'))
 			{
+				$res=false;
 				$ext=new Extension($self->module,Extension::getFolder($self->module));
-				if (($ext->getPHPVersion()!='0.0.0.0') && (!$ext->isVersionsInRange($versMax,$versMin)))
-					$res=false;
-			}
+				if (($ext->getPHPVersion()=='0.0.0.0') || ($ext->isVersionsInRange($versMax,$versMin)))
+					$res=true;
+			}*/
 			break;
 		}
 	if ($res)

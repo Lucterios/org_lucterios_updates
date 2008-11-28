@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 28 November 2008 12:22:54 By  ---
+// --- Last modification: Date 28 November 2008 12:20:57 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -28,43 +28,28 @@ require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 //@TABLES@
 
 //@DESC@
-//@PARAM@ excludeOptionnal=false
+//@PARAM@ Command
+//@PARAM@ exclude=''
 
-function ModulesToUpgrade_APAS_returnDepend(&$self,$excludeOptionnal=false)
+function ModulesToUpgrade_APAS_returnRecursif(&$self,$Command,$exclude='')
 {
 //@CODE_ACTION@
-$depents=$self->getDependDesc();
-$list_depends=array();
-require_once "CORE/extensionManager.inc.php";
-foreach($depents as $depent)
-	if (count($depent)==4)
-	{
-		$res=false;
-		$mod_dep=$depent[0];
-		$versMax=$depent[1];
-		$versMin=$depent[2];
-
-		$mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
-		$mod->module=$mod_dep;
-		$mod->find();
-		if ($mod->fetch())
-		{
-			$pos_p=strpos($mod->version,'.');
-			$pos_p=strpos($mod->version,'.',$pos_p+1);
-			$versMod=substr($mod->version,0,$pos_p);
-			$res=((version_compare($versMod,$versMax)<=0) && (version_compare($versMod,$versMin)>=0));
-			if ($res && ($depent[3]=='o'))
-			{
-				$res=$excludeOptionnal;
-				$ext=new Extension($mod_dep,Extension::getFolder($mod_dep));
-				if (($ext->getPHPVersion()!='0.0.0.0') && (!$ext->isVersionsInRange($versMax,$versMin)))
-					$res=true;
-			}
+$exclude.=" ".$self->module;
+$deps=$self->$Command($exclude);
+$new_deps=$deps;
+foreach($deps as $dep)
+	if (strpos($exclude,$dep)===false) {
+		$other_mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
+		$other_mod->module=$dep;
+		$other_mod->find();
+		if ($other_mod->fetch()) {
+			$other_deps=$other_mod->returnRecursif($Command, $exclude);
+			foreach($other_deps as $other_dep)
+				if ((strpos($exclude,$other_dep)===false) && !in_array($other_dep,$new_deps))
+					$new_deps[]=$other_dep;
 		}
-		if ($res)
-			$list_depends[]=$mod_dep;
 	}
-return $list_depends;
+return $new_deps;
 //@CODE_ACTION@
 }
 
