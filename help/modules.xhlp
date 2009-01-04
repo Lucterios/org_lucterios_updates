@@ -1,13 +1,19 @@
-Pour les Modules et du Client :
-<p>
-1-  Accès aux mises à jour soit par le menu <i>"Administration/Mises à jour et Installation"</i>, soit par les boutons <i>"Administration"</i> puis <i>"Mise à jour et Installation"</i>.<br>
-2-  Une fenêtre s'ouvre, sur celle-ci, il y a deux onglets possible. Le premier, permet de mettre à jour les modules déjà présent dans la base de donnée, le second, permet d'ajouter de nouveaux modules. La mise à jour, ainsi que l'installation de modules se font de la même façon. Sélectionner les mises à jour, ou les modules à installer que vous désirez, en les cochant.<br>
-3-  Cliquer sur <i>"Installer"</i> et laisser la machine travailler.<br>
+
+<p>Accèdez aux mises à jour par le menu <i>"Administration/Mises à jour et Installation"</i>.</p>
+
+<p>Une fenêtre s'ouvre, sur celle-ci, il y a deux onglets possible:
+<ul>
+<li>Le premier, permet de mettre à jour les modules déjà présent.</li>
+<li>le second, permet d'ajouter de nouveaux modules.</li>
+</ul>
+La mise à jour, ainsi que l'installation de modules se font de la même façon. Sélectionner les mises à jour, ou les modules à installer que vous désirez, en les cochant.</p>
 <center><img src='~org_lucterios_updates$Mise_A_Jour.jpg' alt='Faire la mise à jour'/></center><br>
+
+<p>Cliquer sur <i>"Installer"</i> et laisser la machine travailler.</p>
 <center><img src='~org_lucterios_updates$Installation_Module.jpg' alt='Le déroulement de la mise à jour'/></center><br>
 <JUMP_PAGE/>
-4-  Lorsque <b><i>"Téléchargement et installation terminer"</b></i> s'affiche, fermer la fenêtre.<br>
+
+<p>Lorsque <b><i>"Téléchargement et installation terminer"</b></i> s'affiche, fermer la fenêtre.</p>
 <center><img src='~org_lucterios_updates$Fin_Telechargement.jpg' alt='La fin de l'installation'/></center><br>
 <br>
-
-La mise à jour du Client se fait au redémarrage du logiciel. Une fenêtre s'affiche, cliquer dessus et le Client s'installe tout seul. Vous pouvez dès maintenant vous reconnecter.
+<p>Au redémarrage du logiciel, une fenêtre peut vous demander alors de terminer l'installation du client graphique.</p>
