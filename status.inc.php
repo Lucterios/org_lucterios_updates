@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 09 December 2008 22:42:41 By  ---
+// --- Last modification: Date 13 January 2009 22:57:13 By  ---
 
 //@BEGIN@
 function org_lucterios_updates_status(&$xfer_result)
@@ -36,8 +36,13 @@ function org_lucterios_updates_status(&$xfer_result)
 		$res = false;
 		$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 		$module->nouveau='n';
-		if ($module->find()>0)
+		if ($module->find()>0) {
 			$msg = "{[center]}{[font color='red']}Des modules peuvent être mis à jour.{[/font]}{[/center]}";
+			$btn=new Xfer_Comp_Button('updatebtn');
+			$btn->setLocation(0,102,2);
+			$btn->setAction($module->NewAction('Mise à jours','update.png','SelectionUpgrade',FORMTYPE_MODAL,CLOSE_YES));
+			$xfer_result->addComponent($btn);
+		}
 		else
 			$msg = "{[center]}Votre logiciel est à jour.{[/center]}";
 	}

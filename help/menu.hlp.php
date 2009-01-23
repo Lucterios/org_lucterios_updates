@@ -20,7 +20,7 @@
 //  // help file write by SDK tool
 // --- Last modification: Date 14 August 2008 21:20:27 By  ---
 
-$HelpTitle='Mises à jour et Intallation';
+$HelpTitle='Mises à jour et Installation';
 $HelpPosition=900;
 
 $HelpDescriptions=array();
