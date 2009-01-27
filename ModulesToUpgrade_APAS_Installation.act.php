@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 10 September 2008 22:00:42 By  ---
+// --- Last modification: Date 26 January 2009 19:55:40 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -60,7 +60,7 @@ $lbl->setValue("{[center]}{[bold]}Téléchargement et installation des modules{[/b
 $xfer_result->addComponent($lbl);
 $lbl = new Xfer_Comp_LabelForm("warning");
 $lbl->setLocation(0,1,5);
-$lbl->setValue("{[center]}{[italic]}Merci de bien vouloir patientez...{[/italic]}{[/center]}");
+$lbl->setValue("{[center]}{[italic]}Merci de bien vouloir patienter...{[/italic]}{[/center]}");
 $xfer_result->addComponent($lbl);
 $PosY = 3;
 $change_status = false;
