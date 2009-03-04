@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 28 November 2008 12:13:57 By  ---
+// --- Last modification: Date 04 March 2009 19:49:11 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -36,6 +36,9 @@ function ModulesToUpgrade_APAS_returnDepended(&$self)
 $pos_p=strpos($self->version,'.');
 $pos_p=strpos($self->version,'.',$pos_p+1);
 $versMod=substr($self->version,0,$pos_p);
+global $rootPath;
+if(!isset($rootPath))
+	$rootPath = "";
 
 $list_depended=array();
 $mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
@@ -53,7 +56,7 @@ while ($mod->fetch())
 			/*if ($res && ($depent[3]=='o'))
 			{
 				$res=false;
-				$ext=new Extension($self->module,Extension::getFolder($self->module));
+				$ext=new Extension($self->module,Extension::getFolder($self->module,$rootPath));
 				if (($ext->getPHPVersion()=='0.0.0.0') || ($ext->isVersionsInRange($versMax,$versMin)))
 					$res=true;
 			}*/

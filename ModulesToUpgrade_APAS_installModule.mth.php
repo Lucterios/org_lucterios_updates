@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 September 2008 0:17:52 By  ---
+// --- Last modification: Date 04 March 2009 19:43:35 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,7 +33,10 @@ require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 function ModulesToUpgrade_APAS_installModule(&$self)
 {
 //@CODE_ACTION@
-$dir_usr="usr/org_lucterios_updates/";
+global $rootPath;
+if(!isset($rootPath))
+	$rootPath = "";
+$dir_usr=$rootPath."usr/org_lucterios_updates/";
 require_once "CORE/extensionManager.inc.php";
 require_once "CORE/dbcnx.inc.php";
 global $connect;
@@ -53,7 +56,7 @@ try
 				$module_name='applis';
 			else
 				$module_name=$modules->module;
-			$dir_module=Extension::getFolder($module_name,'',$is_client);
+			$dir_module=Extension::getFolder($module_name,$rootPath,$is_client);
 			$ext_backup=$dir_usr.$modules->module;
 			if(is_dir($dir_module) && !$is_client && ($modules->module!='SDK'))
 				rename($dir_module,$ext_backup);
@@ -91,7 +94,7 @@ try
 		{
 			$dir_module=Extension::getFolder($file);
 			if ($dir_module===false)
-				$dir_module=Extension::getFolder($file,'',true);
+				$dir_module=Extension::getFolder($file,$rootPath,true);
 			if (is_dir($dir_module))
 			{
 				deleteDir($dir_module);

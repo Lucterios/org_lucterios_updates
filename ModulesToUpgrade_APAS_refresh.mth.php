@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 10 September 2008 23:38:43 By  ---
+// --- Last modification: Date 04 March 2009 19:47:32 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -44,27 +44,30 @@ $refresh = true;
 if($date_last_refresh != '') {
 	$date = strtotime($date_last_refresh);
 	$now = strtotime(date($format));
-	echo"<!-- date=". print_r($date, true)." -->\n";
-	echo"<!-- now=". print_r($now, true)." -->\n";
+	//echo"<!-- date=". print_r($date, true)." -->\n";
+	//echo"<!-- now=". print_r($now, true)." -->\n";
 	$refresh = (($now-$date)>(3600*24));
 	echo"<!-- refresh=$refresh= (n=$now<(d=$date+t=24h)) Dif=".(($now-$date)/60.0)." -->\n";
 }
 if($refresh) {
+	global $rootPath;
+	if(!isset($rootPath))
+		$rootPath = "";
 	$res = false;
 	$ModulesToUpgrade = new DBObj_org_lucterios_updates_ModulesToUpgrade;
 	$ModulesToUpgrade->find();
-	while($ModulesToUpgrade->fetch())$ModulesToUpgrade->delete();
+	while($ModulesToUpgrade->fetch())
+		$ModulesToUpgrade->delete();
 	require_once"CORE/extensionManager.inc.php";
-	$dir = 'usr/org_lucterios_updates/'; deleteDir($dir);
+	$dir = $rootPath.'usr/org_lucterios_updates/'; 
+	deleteDir($dir);
 	$UpdateServers = new DBObj_org_lucterios_updates_UpdateServers;
 	$UpdateServers->actif = 'o';
 	$UpdateServers->find();
 	while($UpdateServers->fetch()) {
 		$res = $UpdateServers->rafraichir() || $res;
 	}
-	$ModulesToUpgrade = new DBObj_org_lucterios_updates_ModulesToUpgrade;
-	$ModulesToUpgrade->find();
-	while($ModulesToUpgrade->fetch())if(!$ModulesToUpgrade->isPossible())$ModulesToUpgrade->delete();
+	$self->clearImpossibleModules();
 	if($res) {
 		$params = new DBObj_CORE_extension_params;
 		$params->extensionId = 'org_lucterios_updates';

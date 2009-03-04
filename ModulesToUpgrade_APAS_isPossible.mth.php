@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 29 August 2008 23:40:15 By  ---
+// --- Last modification: Date 04 March 2009 19:46:53 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -65,7 +65,10 @@ if (count($depent)==4)
 	}
 }
 if ($res && ($self->famille!='')) {
-	$list_ext=getExtensions();
+	global $rootPath;
+	if(!isset($rootPath))
+		$rootPath = "";
+	$list_ext=getExtensions($rootPath);
 	foreach($list_ext as $extName=>$extDir)
 	{
 		$ext=new Extension($extName,$extDir);

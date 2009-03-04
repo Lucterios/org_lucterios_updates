@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 September 2008 19:16:18 By  ---
+// --- Last modification: Date 04 March 2009 19:46:25 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -36,11 +36,14 @@ function ModulesToUpgrade_APAS_getVersionToCompare(&$self)
 $text=$self->version;
 if ($self->nouveau=='n')
 {
+	global $rootPath;
+	if(!isset($rootPath))
+		$rootPath = "";
 	require_once "CORE/extensionManager.inc.php";
 	$is_client=($self->famille=='client');
 	$module=$self->module;
 	if ($self->famille=='applis') $module='applis';
-	$ext=new Extension($module,Extension::getFolder($module,'',$is_client));
+	$ext=new Extension($module,Extension::getFolder($module,$rootPath,$is_client));
 	if ($is_client)
 		$vers=$ext->getPHPVersion();
 	else

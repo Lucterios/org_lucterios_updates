@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 05 August 2008 22:57:18 By  ---
+// --- Last modification: Date 04 March 2009 19:40:02 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -36,9 +36,12 @@ function ModulesToUpgrade_APAS_downLoad(&$self)
 //@CODE_ACTION@
 if ($self->etat==2)
 {
+	global $rootPath;
+	if(!isset($rootPath))
+		$rootPath = "";
 	require_once "CORE/extensionManager.inc.php";
 	$is_client=($self->famille=='client');
-	$dir_module=Extension::getFolder($self->module,'',$is_client);
+	$dir_module=Extension::getFolder($self->module,$rootPath,$is_client);
 	if (is_dir($dir_module))
 		$canBeWrite=is_writable($dir_module);
 	else {
@@ -55,7 +58,7 @@ if ($self->etat==2)
 	$param_val=$params->getParameters('org_lucterios_updates');
 	$guid=$param_val['GUID'];
 	$UpdateBaseUrl="http://".$self->getField('serveur')->adresse."/actions/down.php?GUID=$guid&module=".$self->module;
-	$dir="usr/org_lucterios_updates/";
+	$dir=$rootPath."usr/org_lucterios_updates/";
 	if (!is_dir($dir)) mkdir($dir, 0777);
 	if (!is_dir($dir))
 		return "Erreur de répertoire de destination ($dir)!";

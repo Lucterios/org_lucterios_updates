@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2008 22:25:13 By  ---
+// --- Last modification: Date 02 February 2009 22:46:24 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -27,7 +27,7 @@ require_once('CORE/rights.inc.php');
 require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 //@TABLES@
 
-//@DESC@
+//@DESC@retourne le tableau des dépendances
 //@PARAM@ 
 
 function ModulesToUpgrade_APAS_getDependDesc(&$self)

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 28 November 2008 12:22:54 By  ---
+// --- Last modification: Date 04 March 2009 19:48:36 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,6 +33,9 @@ require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 function ModulesToUpgrade_APAS_returnDepend(&$self,$excludeOptionnal=false)
 {
 //@CODE_ACTION@
+global $rootPath;
+if(!isset($rootPath))
+	$rootPath = "";
 $depents=$self->getDependDesc();
 $list_depends=array();
 require_once "CORE/extensionManager.inc.php";
@@ -56,7 +59,7 @@ foreach($depents as $depent)
 			if ($res && ($depent[3]=='o'))
 			{
 				$res=$excludeOptionnal;
-				$ext=new Extension($mod_dep,Extension::getFolder($mod_dep));
+				$ext=new Extension($mod_dep,Extension::getFolder($mod_dep,$rootPath));
 				if (($ext->getPHPVersion()!='0.0.0.0') && (!$ext->isVersionsInRange($versMax,$versMin)))
 					$res=true;
 			}
