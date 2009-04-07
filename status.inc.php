@@ -18,14 +18,14 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 13 January 2009 22:57:13 By  ---
+// --- Last modification: Date 06 April 2009 21:53:05 By  ---
 
 //@BEGIN@
 function org_lucterios_updates_status(&$xfer_result)
 {
 	$lab=new Xfer_Comp_LabelForm('updatestitle');
 	$lab->setValue("{[center]}{[italc]}Mises à jour{[/italc]}{[/center]}");
-	$lab->setLocation(0,100,2);
+	$lab->setLocation(0,100,4);
 	$xfer_result->addComponent($lab);
 
 	require_once "extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php";
@@ -39,7 +39,7 @@ function org_lucterios_updates_status(&$xfer_result)
 		if ($module->find()>0) {
 			$msg = "{[center]}{[font color='red']}Des modules peuvent être mis à jour.{[/font]}{[/center]}";
 			$btn=new Xfer_Comp_Button('updatebtn');
-			$btn->setLocation(0,102,2);
+			$btn->setLocation(0,102,4);
 			$btn->setAction($module->NewAction('Mise à jours','update.png','SelectionUpgrade',FORMTYPE_MODAL,CLOSE_YES));
 			$xfer_result->addComponent($btn);
 		}
@@ -47,7 +47,7 @@ function org_lucterios_updates_status(&$xfer_result)
 			$msg = "{[center]}Votre logiciel est à jour.{[/center]}";
 	}
 	$updatelbl=new Xfer_Comp_LabelForm('updatelbl');
-	$updatelbl->setLocation(0,101,2);
+	$updatelbl->setLocation(0,101,4);
 	$updatelbl->setValue($msg);
 	$xfer_result->addComponent($updatelbl);
 }
