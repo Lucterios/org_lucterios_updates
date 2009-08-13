@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:43:35 By  ---
+// --- Last modification: Date 12 August 2009 19:37:53 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -79,7 +79,7 @@ try
 			}
 		}
 	}
-	$install=refreshDataBase(true);
+	$install=refreshDataBase(false);
 	logAutre($install);
 	$connect->commit();
 	return array($extlist,$install);
