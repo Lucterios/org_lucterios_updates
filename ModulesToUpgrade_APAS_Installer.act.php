@@ -46,7 +46,7 @@ $xfer_result->Caption="Installer les module télécharger";
 //@CODE_ACTION@
 List($extList,$Msg)=$self->installModule();
 
-echo "<!-- extList=".print_r($extList,true)." - Msg=".print_r($Msg,true)." -->\n";
+//echo "<!-- extList=".print_r($extList,true)." - Msg=".print_r($Msg,true)." -->\n";
 
 $xfer_result->message($Msg);
 //@CODE_ACTION@

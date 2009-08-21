@@ -47,7 +47,7 @@ if($date_last_refresh != '') {
 	//echo"<!-- date=". print_r($date, true)." -->\n";
 	//echo"<!-- now=". print_r($now, true)." -->\n";
 	$refresh = (($now-$date)>(3600*24));
-	echo"<!-- refresh=$refresh= (n=$now<(d=$date+t=24h)) Dif=".(($now-$date)/60.0)." -->\n";
+	// echo"<!-- refresh=$refresh= (n=$now<(d=$date+t=24h)) Dif=".(($now-$date)/60.0)." -->\n";
 }
 if($refresh) {
 	global $rootPath;

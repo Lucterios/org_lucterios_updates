@@ -48,7 +48,7 @@ if ($self->nouveau=='n')
 		$vers=$ext->getPHPVersion();
 	else
 		$vers=$ext->getDBVersion();
-	echo "<!-- mod=$self->module - client=$is_client - vers=$vers -->\n";
+	// echo "<!-- mod=$self->module - client=$is_client - vers=$vers -->\n";
 	$text.=" (actuellement $vers)";
 }
 else
