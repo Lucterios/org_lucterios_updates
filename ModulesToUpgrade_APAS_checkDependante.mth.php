@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:45:04 By  ---
+// --- Last modification: Date 15 October 2009 19:31:52 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -45,8 +45,13 @@ foreach($depend_list as $depend_item) {
 	$option=($depend_item[3]=='o');
 	$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 	$module->module=$ext_name;
-	if ($module->find() && $module->fetch())
-		$new_status=version_compare($module->version,$version_max,'<=') && version_compare($module->version,$version_min,'>=');
+	if ($module->find() && $module->fetch()) {
+		$current_version_list=split("\.",$module->version);
+		$current_version=$current_version_list[0].'.'.$current_version_list[1];
+		$comp_max=version_compare($current_version,$version_max,'<=');
+		$comp_min=version_compare($current_version,$version_min,'>=');
+		$new_status=$comp_max && $comp_min;
+	}
 	else
 		$new_status=$option;
 
