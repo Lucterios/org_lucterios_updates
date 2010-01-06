@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 05 January 2010 2:23:33 By  ---
+// --- Last modification: Date 07 January 2010 0:33:59 By  ---
 
 $extention_name="org_lucterios_updates";
 $extention_description="Modules gérant le téléchargement et l'installation d'autres extensions.{[newline]}Il utilise au mieux plusieurs serveurs de mise à jours et gére les dépendances entre les modules.";
@@ -29,8 +29,8 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=0;
-$version_release=5;
-$version_build=6;
+$version_release=6;
+$version_build=7;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 0, 1, 0, false);
