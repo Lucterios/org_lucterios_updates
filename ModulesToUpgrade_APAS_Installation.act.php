@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 26 January 2009 19:55:40 By  ---
+// --- Last modification: Date 02 February 2010 1:52:08 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -107,6 +107,13 @@ case 2:
 	$xfer_result->m_context['status'] = 3;
 	$status = 3;
 	break;
+case 3:
+	$ret = $self->checkModules();
+	if($ret!=null)
+		$erreur .= $ret."{[newline]}";
+	$xfer_result->m_context['status'] = 4;
+	$status = 4;
+	break;
 }
 $module = new DBObj_org_lucterios_updates_ModulesToUpgrade;
 $module->find();
@@ -140,22 +147,31 @@ $lbl_err->setValue("{[center]}{[font color='red']}$erreur{[/font]}{[/center]}");
 $lbl_err->setSize(50,750);
 $xfer_result->addComponent($lbl_err);
 $text = 'Téléchargement des modules';
-if($change_status)$text = 'Installation des modules';
-if($status == 3)$text = 'Téléchargement et installation terminés';
-$btn = new Xfer_Comp_Button("Next");
-$btn->setLocation(0,$PosY+10,5);
-$btn->setAction($self->NewAction($text,'','Installation', FORMTYPE_REFRESH, CLOSE_NO));
-$btn->JavaScript = "
+if($change_status)
+	$text = 'Installation des modules';
+if($status != 4) {
+	if($status == 3)
+		$text = 'Controles des modules';
+	$btn = new Xfer_Comp_Button("Next");
+	$btn->setLocation(0,$PosY+10,5);
+	$btn->setAction($self->NewAction($text,'','Installation', FORMTYPE_REFRESH, CLOSE_NO));
+	$btn->JavaScript = "
 	parent.refresh();
-";
-$lbl = new Xfer_Comp_LabelForm("info");
-$lbl->setLocation(0,$PosY+10,5);
-$lbl->setValue("{[center]}$text{[/center]}");
-if($status != 3)$xfer_result->addComponent($btn);
-else $xfer_result->addComponent($lbl);
+	";
+	$xfer_result->addComponent($btn);
+}
+else {
+	$text = 'Téléchargement et installation terminés';
+	$lbl = new Xfer_Comp_LabelForm("info");
+	$lbl->setLocation(0,$PosY+10,5);
+	$lbl->setValue("{[center]}$text{[/center]}");
+	$xfer_result->addComponent($lbl);
+}
 $xfer_result->m_context['erreur'] = $erreur;
-if($status == 3)$xfer_result->addAction( new Xfer_Action('_Fermer','ok.png','CORE','menu', FORMTYPE_MODAL, CLOSE_YES));
-else $xfer_result->addAction( new Xfer_Action('_Annuler','cancel.png','','', FORMTYPE_MODAL, CLOSE_YES));
+if($status == 4)
+	$xfer_result->addAction( new Xfer_Action('_Fermer','ok.png','CORE','menu', FORMTYPE_MODAL, CLOSE_YES));
+else 
+	$xfer_result->addAction( new Xfer_Action('_Annuler','cancel.png','','', FORMTYPE_MODAL, CLOSE_YES));
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;
