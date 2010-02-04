@@ -18,13 +18,13 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 11 January 2010 21:16:06 By  ---
+// --- Last modification: Date 03 February 2010 9:11:59 By  ---
 
 //@BEGIN@
 function org_lucterios_updates_status(&$xfer_result)
 {
 	$lab=new Xfer_Comp_LabelForm('updatestitle');
-	$lab->setValue("{[center]}{[italc]}Mises à jour{[/italc]}{[/center]}");
+	$lab->setValue('{[center]}{[bold]}{[underline]}Mises à jour{[/underline]}{[/bold]}{[/center]}');
 	$lab->setLocation(0,100,4);
 	$xfer_result->addComponent($lab);
 
@@ -50,6 +50,11 @@ function org_lucterios_updates_status(&$xfer_result)
 	$updatelbl->setLocation(0,101,4);
 	$updatelbl->setValue($msg);
 	$xfer_result->addComponent($updatelbl);
+
+	$lab=new Xfer_Comp_LabelForm('updatesend');
+	$lab->setValue('{[center]}{[hr/]}{[/center]}');
+	$lab->setLocation(0,103,4);
+	$xfer_result->addComponent($lab);
 }
 //@END@
 ?>

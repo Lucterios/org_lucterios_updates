@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 02 February 2010 2:02:58 By  ---
+// --- Last modification: Date 02 February 2010 19:33:02 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -37,22 +37,7 @@ global $rootPath;
 if(!isset($rootPath))
 	$rootPath = "";
 require_once "CORE/extensionManager.inc.php";
-require_once "CORE/dbcnx.inc.php";
-global $connect;
-
-$ret="";
-
-$ext_list = getExtensions($rootPath);
-foreach($ext_list as $name => $dir)
-	$set_of_ext[] = new Extension($name,$dir);
-$set_of_ext = sortExtension($set_of_ext);
-$ExtensionDescription = array();
-foreach($set_of_ext as $ext) {
-	$ret.=$ext->Dir."|";
-	$ext->upgradeContraintsTable();
-	$ext->checkStorageFunctions();
-	$ext->postInstall();
-}
+checkExtensions($rootPath);
 
 return null;
 //@CODE_ACTION@
