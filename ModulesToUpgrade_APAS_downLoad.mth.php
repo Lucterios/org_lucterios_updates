@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:40:02 By  ---
+// --- Last modification: Date 23 February 2010 12:12:34 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -57,9 +57,11 @@ if ($self->etat==2)
 	$params=new DBObj_CORE_extension_params;
 	$param_val=$params->getParameters('org_lucterios_updates');
 	$guid=$param_val['GUID'];
-	$UpdateBaseUrl="http://".$self->getField('serveur')->adresse."/actions/down.php?GUID=$guid&module=".$self->module;
+	$newModule=is_dir($dir_module)?'n':'o';
+	$UpdateBaseUrl="http://".$self->getField('serveur')->adresse."/actions/down.php?GUID=$guid&NEW=$newModule&module=".$self->module;
 	$dir=$rootPath."usr/org_lucterios_updates/";
-	if (!is_dir($dir)) mkdir($dir, 0777);
+	if (!is_dir($dir))
+		mkdir($dir, 0777);
 	if (!is_dir($dir))
 		return "Erreur de répertoire de destination ($dir)!";
      	$PackageFileName = $dir.$self->module.".lpk";
