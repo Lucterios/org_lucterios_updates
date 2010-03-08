@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:48:36 By  ---
+// --- Last modification: Date 07 March 2010 23:05:25 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -29,15 +29,17 @@ require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 
 //@DESC@
 //@PARAM@ excludeOptionnal=false
+//@PARAM@ sameOrigine=false
+//@PARAM@ moduleNoChecked=array()
 
-function ModulesToUpgrade_APAS_returnDepend(&$self,$excludeOptionnal=false)
+function ModulesToUpgrade_APAS_returnDepend(&$self,$excludeOptionnal=false,$sameOrigine=false,$moduleNoChecked=array())
 {
 //@CODE_ACTION@
 global $rootPath;
 if(!isset($rootPath))
 	$rootPath = "";
 $depents=$self->getDependDesc();
-$list_depends=array();
+$first_list_depends=array();
 require_once "CORE/extensionManager.inc.php";
 foreach($depents as $depent)
 	if (count($depent)==4)
@@ -47,26 +49,41 @@ foreach($depents as $depent)
 		$versMax=$depent[1];
 		$versMin=$depent[2];
 
-		$mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
-		$mod->module=$mod_dep;
-		$mod->find();
-		if ($mod->fetch())
-		{
-			$pos_p=strpos($mod->version,'.');
-			$pos_p=strpos($mod->version,'.',$pos_p+1);
-			$versMod=substr($mod->version,0,$pos_p);
-			$res=((version_compare($versMod,$versMax)<=0) && (version_compare($versMod,$versMin)>=0));
-			if ($res && ($depent[3]=='o'))
+		if (!in_array($mod_dep,$moduleNoChecked)) {
+			$mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
+			$mod->module=$mod_dep;
+			$mod->find();
+			if ($mod->fetch())
 			{
-				$res=$excludeOptionnal;
-				$ext=new Extension($mod_dep,Extension::getFolder($mod_dep,$rootPath));
-				if (($ext->getPHPVersion()!='0.0.0.0') && (!$ext->isVersionsInRange($versMax,$versMin)))
-					$res=true;
+				$pos_p=strpos($mod->version,'.');
+				$pos_p=strpos($mod->version,'.',$pos_p+1);
+				$versMod=substr($mod->version,0,$pos_p);
+				$res=((version_compare($versMod,$versMax)<=0) && (version_compare($versMod,$versMin)>=0));
+				if ($res && ($depent[3]=='o'))
+				{
+					$res=$excludeOptionnal;
+					$ext=new Extension($mod_dep,Extension::getFolder($mod_dep,$rootPath));
+					if (($ext->getPHPVersion()!='0.0.0.0') && (!$ext->isVersionsInRange($versMax,$versMin)) && (($mod->nouveau==$self->nouveau) || !$sameOrigine))
+						$res=true;
+				}
 			}
+			if ($res)
+				$first_list_depends[]=$mod_dep;
 		}
-		if ($res)
-			$list_depends[]=$mod_dep;
 	}
+
+$list_depends=array();
+foreach($first_list_depends as $mod_dep) {
+	$mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
+	$mod->module=$mod_dep;
+	$mod->find();
+	if ($mod->fetch()) {
+		$other_depends=$mod->returnDepend(false,$sameOrigine,array_merge($moduleNoChecked,$first_list_depends));
+		$list_depends=array_merge($list_depends,$other_depends);
+	}
+	$list_depends[]=$mod_dep;
+}
+$list_depends=array_unique($list_depends);
 return $list_depends;
 //@CODE_ACTION@
 }

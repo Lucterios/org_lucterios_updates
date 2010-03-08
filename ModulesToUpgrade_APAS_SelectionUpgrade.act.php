@@ -78,13 +78,6 @@ if ($res) {
 					$xfer_result->newTab("Modules à mettre à jours");
 				else
 					$xfer_result->newTab("Nouveaux modules");
-				/*$lbl=new Xfer_Comp_LabelForm("Nouveau_".$Current_Nouveau);
-				$lbl->setLocation(0,$PosY++,4);
-				if ($Current_Nouveau=='n')
-					$lbl->setValue('{[center]}{[underline]}Modules à mettre à jours{[/underline]}{[/center]}');
-				else
-					$lbl->setValue('{[center]}{[underline]}Nouveaux modules{[/underline]}{[/center]}');
-				$xfer_result->addComponent($lbl);*/
 			}
 
 			$check=new Xfer_Comp_Check($module->module);
@@ -102,13 +95,17 @@ if (type=='o')
 
 			foreach($depO as $dep)
 				$script.="	parent.get('$dep').setValue(new_text1);\n";
+			foreach($depN as $dep)
+				$script.="	parent.get('$dep').setValue(new_text1);\n";
 			foreach($depI as $dep)
 				$script.="	parent.get('$dep').setValue(new_text0);\n";
 
 			$script.="}
 else
 {";
-
+			if ($Current_Nouveau=='n')
+				foreach($depO as $dep)
+					$script.="	parent.get('$dep').setValue(new_text0);\n";
 			foreach($depN as $dep)
 				$script.="	parent.get('$dep').setValue(new_text0);\n";
 

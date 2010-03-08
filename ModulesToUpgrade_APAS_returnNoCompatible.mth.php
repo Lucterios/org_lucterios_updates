@@ -35,28 +35,28 @@ function ModulesToUpgrade_APAS_returnNoCompatible(&$self)
 //@CODE_ACTION@
 $list=array();
 
-$deps_self=$self->returnDepend();
+if ($self->famille!='') {
+	$deps_self=$self->returnDepend();
 
-$Mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
-$Mod->famille=$self->famille;
-$Mod->find();
-while ($Mod->fetch())
-	if ($Mod->module!=$self->module)
-	{
-		$ret=false;
-		foreach($deps_self as $dep_self)
-			if ($Mod->module==$dep_self)
-				$ret=true;
-		if (!$ret)
-		{
-			$deps_mod=$Mod->returnDepend();
-			foreach($deps_mod as $dep_mod)
-				if ($self->module==$dep_mod)
+	$Mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
+	$Mod->famille=$self->famille;
+	$Mod->find();
+	while ($Mod->fetch())
+		if ($Mod->module!=$self->module) {
+			$ret=false;
+			foreach($deps_self as $dep_self)
+				if ($Mod->module==$dep_self)
 					$ret=true;
+			if (!$ret) {	
+				$deps_mod=$Mod->returnDepend();
+				foreach($deps_mod as $dep_mod)
+					if ($self->module==$dep_mod)
+						$ret=true;
+			}
+			if (!$ret)
+				$list[]=$Mod->module;
 		}
-		if (!$ret)
-			$list[]=$Mod->module;
-	}
+}
 //echo "<!-- mod=".$self->module." - list=".print_r($list,true)." -->\n";
 return $list;
 //@CODE_ACTION@

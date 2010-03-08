@@ -34,7 +34,11 @@ function ModulesToUpgrade_APAS_clearImpossibleModules(&$self)
 {
 //@CODE_ACTION@
 $modif=true;
+global $rootPath;
+if(!isset($rootPath))
+	$rootPath = "./";
 while ($modif) {
+	echo "<!-- ModulesToUpgrade_APAS_clearImpossibleModules --> \n";
 	$modif=false;
 	$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 	$module->find();
@@ -44,29 +48,51 @@ while ($modif) {
 			$modif=true;
 		}
 	}
-
-	if (!modif) {
-		global $rootPath;
-		if(!isset($rootPath))
-			$rootPath = "";
+	echo "<!-- AA --> \n";
+	if (!$modif) {
+		echo "<!-- BB --> \n";
 		require_once('CORE/extensionManager.inc.php');
 		$ext_names=getExtensions($rootPath);
+		echo "<!-- ext=".print_r($ext_names,true)."--> \n";
 		foreach($ext_names as $extname=>$extpath) {
 			require($extpath."setup.inc.php");
 			foreach($depencies as $depency) {
 				$version_max=$depency->version_majeur_max.".".$depency->version_mineur_max;
 				$version_min=$depency->version_majeur_min.".".$depency->version_mineur_min;
+				echo "<!-- Clear $extname ~ ".$depency->name." # [$version_min,$version_max] -->\n";
 				$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 				$module->module=$depency->name;
-				if ($module->find() && $module->fetch()) {
-					if (version_compare($module->version,$version_max,'>') || version_compare($module->version,$version_min,'<')) {
-						$module->delete();
-						$modif=true;
+				$module->find();
+				if ($module->fetch()) {
+					$current_version_list=split("\.",$module->version);
+					$current_version=$current_version_list[0].'.'.$current_version_list[1];
+					echo "<!-- ? $extname ".$depency->name." v$current_version # [$version_min,$version_max] -->\n";
+					if (version_compare($current_version,$version_max,'>') || version_compare($current_version,$version_min,'<')) {
+						$other_module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
+						$other_module->module=$extname;
+						$other_module->find();
+						if ($other_module->fetch()) {
+							$depend_list=$other_module->getDependDesc();
+							foreach($depend_list as $depend_item) {
+								if ($depend_item[0]==$module->module) {
+									$other_version_max=$depend_item[1];
+									$other_version_min=$depend_item[2];
+								}
+							}
+							echo "<!-- ?? $extname ".$depency->name." v$current_version # [$other_version_min,$other_version_max] -->\n";
+							if (version_compare($current_version,$other_version_max,'>') || version_compare($current_version,$other_version_min,'<'))
+								$modif=true;
+						}
+						else 
+							$modif=true;
+						if ($modif)
+							$module->delete();
 					}
 				}
 			}
 		}
 	}
+	echo "<!-- CC --> \n";
 }
 //@CODE_ACTION@
 }

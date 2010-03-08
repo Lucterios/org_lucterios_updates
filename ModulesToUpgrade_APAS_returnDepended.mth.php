@@ -30,7 +30,7 @@ require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 //@DESC@
 //@PARAM@ 
 
-function ModulesToUpgrade_APAS_returnDepended(&$self)
+function ModulesToUpgrade_APAS_returnDepended(&$self,$moduleNoChecked=array())
 {
 //@CODE_ACTION@
 $pos_p=strpos($self->version,'.');
@@ -43,8 +43,7 @@ if(!isset($rootPath))
 $list_depended=array();
 $mod=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 $mod->find();
-while ($mod->fetch())
-{
+while ($mod->fetch()) {
 	$res=false;
 	$depents=$mod->getDependDesc();
 	foreach($depents as $depent)
@@ -52,14 +51,7 @@ while ($mod->fetch())
 		{
 			$versMax=$depent[1];
 			$versMin=$depent[2];
-			$res=((version_compare($versMod,$versMax)<=0) && (version_compare($versMod,$versMin)>=0));
-			/*if ($res && ($depent[3]=='o'))
-			{
-				$res=false;
-				$ext=new Extension($self->module,Extension::getFolder($self->module,$rootPath));
-				if (($ext->getPHPVersion()=='0.0.0.0') || ($ext->isVersionsInRange($versMax,$versMin)))
-					$res=true;
-			}*/
+			$res=((version_compare($versMod,$versMax)<=0) && (version_compare($versMod,$versMin)>=0) && ($mod->nouveau==$self->nouveau));
 			break;
 		}
 	if ($res)
