@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 29 November 2008 0:11:31 By  ---
+// --- Last modification: Date 08 March 2010 19:00:36 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -87,29 +87,26 @@ if ($res) {
 			$depN=$module->returnDepended();
 			$depI=$module->returnNoCompatible();
 
-			$script="var type=current.getValue();
+			if ($module->nouveau=='n') {
+				$script="current.setEnabled(false);";
+			} else {
+				$script="var type=current.getValue();
 var new_text1='<CHECK><![CDATA[1]]></CHECK>';
 var new_text0='<CHECK><![CDATA[]]></CHECK>';
 if (type=='o')
 {";
+				foreach($depO as $dep)
+					$script.="	parent.get('$dep').setValue(new_text1);\n";
+				foreach($depI as $dep)
+					$script.="	parent.get('$dep').setValue(new_text0);\n";
 
-			foreach($depO as $dep)
-				$script.="	parent.get('$dep').setValue(new_text1);\n";
-			foreach($depN as $dep)
-				$script.="	parent.get('$dep').setValue(new_text1);\n";
-			foreach($depI as $dep)
-				$script.="	parent.get('$dep').setValue(new_text0);\n";
-
-			$script.="}
+				$script.="}
 else
 {";
-			if ($Current_Nouveau=='n')
-				foreach($depO as $dep)
+				foreach($depN as $dep)
 					$script.="	parent.get('$dep').setValue(new_text0);\n";
-			foreach($depN as $dep)
-				$script.="	parent.get('$dep').setValue(new_text0);\n";
-
-			$script.="}";
+				$script.="}";
+			}
 			$check->JavaScript = $script;
 			$xfer_result->addComponent($check);
 
