@@ -18,17 +18,16 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 30 August 2008 16:37:51 By  ---
+// --- Last modification: Date 17 March 2010 23:42:27 By  ---
 
 //@BEGIN@
-
 function install_org_lucterios_updates($ExensionVersions) {
 	$text = "";
 	require_once"CORE/extension_params.tbl.php";
 	$params = new DBObj_CORE_extension_params;
 	$params->extensionId = 'org_lucterios_updates';
 	$params->paramName = 'GUID';
-	$params->find();
+	$params->find(false);
 	if($params->fetch()) {
 		require_once"extensions/org_lucterios_updates/GUIDGenerator.inc.php";
 		$decode = uuidDecode($params->value);
@@ -39,6 +38,5 @@ function install_org_lucterios_updates($ExensionVersions) {
 	}
 	return $text;
 }
-
 //@END@
 ?>
