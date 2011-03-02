@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 October 2008 11:33:56 By  ---
+// --- Last modification: Date 28 February 2011 20:24:14 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -34,7 +34,6 @@ require_once('extensions/org_lucterios_updates/UpdateServers.tbl.php');
 function UpdateServers_APAS_rafraichir(&$self)
 {
 //@CODE_ACTION@
-require_once("HTTP/Request.php");
 $updateserver='http://'.$self->adresse."/actions/liste.php";
 $sec = microtime(true);
 $Rep = file($updateserver);

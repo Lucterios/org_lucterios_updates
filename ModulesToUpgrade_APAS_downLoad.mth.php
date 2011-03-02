@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 23 February 2010 12:12:34 By  ---
+// --- Last modification: Date 01 March 2011 21:05:30 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -96,8 +96,8 @@ if ($self->etat==2)
 			return "Erreur : ".$LIST->getCData();
 		}
 
-		require_once("Archive/Tar.php");
-		$tar_object = new Archive_Tar($PackageFileName,'gz');
+		require_once("CORE/ArchiveTar.inc.php");
+		$tar_object = new ArchiveTar($PackageFileName,true);
 		if ($self->module=='CORE')
 			$tar_object->extractList("CORE/setup.inc.php",$dir,"CORE");
 		else	if ($self->famille=='client')
