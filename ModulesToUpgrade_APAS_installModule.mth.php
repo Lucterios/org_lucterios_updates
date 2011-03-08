@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Method file write by SDK tool
-// --- Last modification: Date 02 March 2011 18:44:17 By  ---
+// --- Last modification: Date 08 March 2011 0:33:00 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -67,6 +67,7 @@ try
 				$res=$tar_object->extract('.');
 			else
 				$res=$tar_object->extract($dir_module);
+			unset($tar_object);
 			if ($res)
 			{
 				$extlist[]=array($module_name,!$is_client);
