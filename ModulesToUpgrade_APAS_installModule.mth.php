@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Method file write by SDK tool
-// --- Last modification: Date 08 March 2011 0:33:00 By  ---
+// --- Last modification: Date 10 March 2011 19:30:47 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -58,10 +58,10 @@ try
 				$module_name=$modules->module;
 			$dir_module=Extension::getFolder($module_name,$rootPath,$is_client);
 			$ext_backup=$dir_usr.$modules->module;
+			require_once("CORE/ArchiveTar.inc.php");
 			if(is_dir($dir_module) && (!$is_client || ($modules->module=='SDK')))
 				rename($dir_module,$ext_backup);
 
-			require_once("CORE/ArchiveTar.inc.php");
 			$tar_object = new ArchiveTar($lpk_file,true);
 			if ($modules->module=='CORE')
 				$res=$tar_object->extract('.');
