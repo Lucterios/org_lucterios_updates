@@ -21,7 +21,7 @@
 // --- Last modification: Date 03 February 2010 9:11:59 By  ---
 
 //@BEGIN@
-function org_lucterios_updates_status(&$xfer_result)
+function org_lucterios_updates_APAS_status(&$xfer_result)
 {
 	$lab=new Xfer_Comp_LabelForm('updatestitle');
 	$lab->setValue('{[center]}{[bold]}{[underline]}Mises à jour{[/underline]}{[/bold]}{[/center]}');

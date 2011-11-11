@@ -37,10 +37,9 @@ $dep=$self->dependance;
 $depents=array();
 while (($pos_space=strpos($dep," "))!==false)
 {
-	$depents[]=split(';',substr($dep,0,$pos_space));
+	$depents[]=explode(';',substr($dep,0,$pos_space));
 	$dep=substr($dep,$pos_space+1);
 }
-//echo "<!-- B module=".$self->module." - dep=".$self->dependance." - depends=".print_r($depents,true)." -->\n";
 return $depents;
 //@CODE_ACTION@
 }

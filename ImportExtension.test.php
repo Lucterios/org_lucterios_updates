@@ -57,8 +57,6 @@ unset($rep);unset($comp1);unset($comp2);
 $rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_AddModifyAct",array('adresse'=>'projets.lucterios.org/lucteriosUpdates','actif'=>'o'),"Xfer_Container_Acknowledge");
 unset($rep);
 
-echo "<!-- ImportExtension A -->";
-
 $rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_List",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("UpdateServers");
 $test->assertEquals(2,count($comp1->m_records),"records");
@@ -66,14 +64,10 @@ $test->assertEquals("projets.lucterios.org/lucteriosUpdates",$comp1->m_records["
 $test->assertEquals("Oui",$comp1->m_records["100"]["actif"]);
 unset($rep);unset($comp1);
 
-echo "<!-- ImportExtension B -->";
-
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_SelectionUpgrade",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("PourTest");
 $test->assertClass("xfer_comp_check",$comp1,"PourTest");
 unset($rep);unset($comp1);
-
-echo "<!-- ImportExtension C -->";
 
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",array("PourTest"=>'o','erreur'=>''),"Xfer_Container_Custom");
 $test->assertEquals('',$rep->m_context['erreur'],'erreur A '.print_r($rep->m_context,true));
@@ -82,16 +76,12 @@ $comp1=$rep->getComponents("Next");
 $test->assertClass("xfer_comp_button",$comp1,"Next A");
 unset($rep);unset($comp1);
 
-echo "<!-- ImportExtension D -->";
-
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",array("PourTest"=>'o','erreur'=>'','status'=>1),"Xfer_Container_Custom");
 $test->assertEquals('',$rep->m_context['erreur'],'erreur B');
 $test->assertEquals(1,$rep->m_context['status'],'status B');
 $comp1=$rep->getComponents("Next");
 $test->assertClass("xfer_comp_button",$comp1,"Next B");
 unset($rep);unset($comp1);
-
-echo "<!-- ImportExtension E -->";
 
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",array("PourTest"=>'o','erreur'=>'','status'=>1),"Xfer_Container_Custom");
 $test->assertEquals('',$rep->m_context['erreur'],'erreur C');
@@ -100,16 +90,12 @@ $comp1=$rep->getComponents("Next");
 $test->assertClass("xfer_comp_button",$comp1,"Next C");
 unset($rep);unset($comp1);
 
-echo "<!-- ImportExtension F -->";
-
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",array("PourTest"=>'o','erreur'=>'','status'=>1),"Xfer_Container_Custom");
 $test->assertEquals('',$rep->m_context['erreur'],'erreur D');
 $test->assertEquals(2,$rep->m_context['status'],'status D');
 $comp1=$rep->getComponents("Next");
 $test->assertClass("xfer_comp_button",$comp1,"Next D");
 unset($rep);unset($comp1);
-
-echo "<!-- ImportExtension G -->";
 
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",array("PourTest"=>'o','erreur'=>'','status'=>2),"Xfer_Container_Custom");
 $test->assertEquals('',$rep->m_context['erreur'],'erreur E');
@@ -118,16 +104,12 @@ $comp1=$rep->getComponents("Next");
 $test->assertClass("xfer_comp_button",$comp1,"Next E");
 unset($rep);unset($comp1);
 
-echo "<!-- ImportExtension H -->";
-
 $rep=$test->CallAction("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",array("PourTest"=>'o','erreur'=>'','status'=>4),"Xfer_Container_Custom");
 $test->assertEquals('',$rep->m_context['erreur'],'erreur F');
 $test->assertEquals(4,$rep->m_context['status'],'status F');
 $comp1=$rep->getComponents("Next");
 $test->assertEquals(null,$comp1,"Next F");
 unset($rep);unset($comp1);
-
-echo "<!-- ImportExtension I -->";
 
 $test->assertEquals(true,is_dir("extensions/PourTest"),"extensions/PourTest");
 $test->assertEquals(true,is_file("extensions/PourTest/config.inc.php"),"config.inc.php");
@@ -143,15 +125,11 @@ $test->assertEquals(true,is_file("extensions/PourTest/help/help.xhlp"),"help.xhl
 $test->assertEquals(true,is_file("extensions/PourTest/help/menu.hlp.php"),"menu.hlp.php");
 $test->assertEquals(true,is_file("extensions/PourTest/help/presence_online.png"),"presence_online.png");
 
-echo "<!-- ImportExtension J -->";
-
 $rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_Del",array('CONFIRME'=>'YES','UpdateServers'=>100),"Xfer_Container_Acknowledge");
 $rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_List",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("UpdateServers");
 $test->assertEquals(1,count($comp1->m_records),"records");
 unset($rep);unset($comp1);
-
-echo "<!-- ImportExtension K -->";
 //@CODE_ACTION@
 }
 

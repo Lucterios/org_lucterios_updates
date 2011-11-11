@@ -44,11 +44,11 @@ try {
 $xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_Installer",$Params);
 $xfer_result->Caption="Installer les module télécharger";
 //@CODE_ACTION@
+global $SECURITY_LOCK;
+$SECURITY_LOCK->open(true);
 List($extList,$Msg)=$self->installModule();
-
-//echo "<!-- extList=".print_r($extList,true)." - Msg=".print_r($Msg,true)." -->\n";
-
 $xfer_result->message($Msg);
+$SECURITY_LOCK->close();
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;

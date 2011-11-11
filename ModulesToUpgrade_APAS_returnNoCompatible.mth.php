@@ -57,7 +57,6 @@ if ($self->famille!='') {
 				$list[]=$Mod->module;
 		}
 }
-//echo "<!-- mod=".$self->module." - list=".print_r($list,true)." -->\n";
 return $list;
 //@CODE_ACTION@
 }

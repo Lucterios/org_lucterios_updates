@@ -50,6 +50,9 @@ try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",$Params);
 $xfer_result->Caption="Cycle d installation des mise a jours";
 //@CODE_ACTION@
+global $SECURITY_LOCK;
+$SECURITY_LOCK->open(true);
+
 $img = new Xfer_Comp_Image("img");
 $img->setLocation(0,0);
 $img->setValue("update.png");
@@ -172,6 +175,7 @@ if($status == 4)
 	$xfer_result->addAction( new Xfer_Action('_Fermer','ok.png','CORE','menu', FORMTYPE_MODAL, CLOSE_YES));
 else 
 	$xfer_result->addAction( new Xfer_Action('_Annuler','cancel.png','','', FORMTYPE_MODAL, CLOSE_YES));
+$SECURITY_LOCK->close();
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;

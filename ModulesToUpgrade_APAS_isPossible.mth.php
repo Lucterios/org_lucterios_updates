@@ -36,8 +36,6 @@ function ModulesToUpgrade_APAS_isPossible(&$self)
 $res=true;
 $depents=$self->getDependDesc();
 
-//echo "<!-- ### module=".$self->module." - famille=".$self->famille." deps=".print_r($depents,true)." -->\n";
-
 require_once "CORE/extensionManager.inc.php";
 foreach($depents as $depent)
 if (count($depent)==4)
@@ -58,7 +56,6 @@ if (count($depent)==4)
 			$versMod=substr($mod->version,0,$pos_p);
 			if ((version_compare($versMod,$versMax)>0) || (version_compare($versMod,$versMin)<0))
 				$res=false;
-			//echo "<!-- mod=$mod_dep - versMax=$versMax -	versMin=$versMin - versMod=$versMod ($res) -->\n";
 		}
 		else if ($depent[3]=='n')
 			$res=false;
@@ -72,7 +69,6 @@ if ($res && ($self->famille!='')) {
 	foreach($list_ext as $extName=>$extDir)
 	{
 		$ext=new Extension($extName,$extDir);
-		//echo "<!-- ext=".$ext->Name." - Fam=".$ext->famille." -->\n";
 		if (($self->famille!='applis') && ($ext->Name!=$self->module) && ($ext->famille==$self->famille))
 		{
 			$res=false;
@@ -85,7 +81,6 @@ if ($res && ($self->famille!='')) {
 		}
 	}
 }
-//echo "<!-- ### module=".$self->module." - famille=".$self->famille." deps=".print_r($depents,true)." ==> IsPossible=$res -->\n";
 return $res;
 //@CODE_ACTION@
 }

@@ -31,7 +31,7 @@ require_once('CORE/xfer.inc.php');
 //@XFER:acknowledge@
 
 
-//@DESC@Valider un serveur de mise ï¿½ jours
+//@DESC@Valider un serveur de mise à jours
 //@PARAM@ UpdateServers
 
 //@TRANSACTION:
@@ -49,7 +49,7 @@ global $connect;
 $connect->begin();
 try {
 $xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_updates","UpdateServers_APAS_AddModifyAct",$Params);
-$xfer_result->Caption='Valider un serveur de mise ï¿½ jours';
+$xfer_result->Caption='Valider un serveur de mise à jours';
 //@CODE_ACTION@
 if($UpdateServers>0)
 	$find=$self->get($UpdateServers);

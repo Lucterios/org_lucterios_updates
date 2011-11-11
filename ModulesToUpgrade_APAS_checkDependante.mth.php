@@ -34,7 +34,6 @@ require_once('extensions/org_lucterios_updates/ModulesToUpgrade.tbl.php');
 function ModulesToUpgrade_APAS_checkDependante(&$self)
 {
 //@CODE_ACTION@
-// echo "<!-- ### MODULE=".$self->module." v=".$self->version." ### -->\n";
 $depend_list=$self->getDependDesc();
 foreach($depend_list as $depend_item) {
 	$new_status=false;
@@ -46,7 +45,7 @@ foreach($depend_list as $depend_item) {
 	$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 	$module->module=$ext_name;
 	if ($module->find() && $module->fetch()) {
-		$current_version_list=split("\.",$module->version);
+		$current_version_list=explode("\.",$module->version);
 		$current_version=$current_version_list[0].'.'.$current_version_list[1];
 		$comp_max=version_compare($current_version,$version_max,'<=');
 		$comp_min=version_compare($current_version,$version_min,'>=');
@@ -63,12 +62,10 @@ foreach($depend_list as $depend_item) {
 	}
 	else
 		$local_status=$option;
-	// echo "<!-- ** $ext_name [$version_min;$version_max] (new:$new_status/local:$local_status) ** -->\n";
 	if (!$new_status && !$local_status)
 		return false;
 }
 if ($self->famille!='') {
-	// echo "<!-- 888 Famille=".$self->famille." 888 -->\n";
 	global $rootPath;
 	if(!isset($rootPath))
 		$rootPath = "";
@@ -88,7 +85,6 @@ if ($self->famille!='') {
 		}
 	}
 }
-// echo "<!-- 0000000000000000 -->\n";
 return true;
 //@CODE_ACTION@
 }

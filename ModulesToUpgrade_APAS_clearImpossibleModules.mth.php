@@ -38,7 +38,6 @@ global $rootPath;
 if(!isset($rootPath))
 	$rootPath = "./";
 while ($modif) {
-	echo "<!-- ModulesToUpgrade_APAS_clearImpossibleModules --> \n";
 	$modif=false;
 	$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 	$module->find();
@@ -48,12 +47,9 @@ while ($modif) {
 			$modif=true;
 		}
 	}
-	echo "<!-- AA --> \n";
 	if (!$modif) {
-		echo "<!-- BB --> \n";
 		require_once('CORE/extensionManager.inc.php');
 		$ext_names=getExtensions($rootPath);
-		echo "<!-- ext=".print_r($ext_names,true)."--> \n";
 		foreach($ext_names as $extname=>$extpath) {
 			if (!is_file($extpath."setup.inc.php")) {
 				require_once("CORE/Lucterios_Error.inc.php");
@@ -63,14 +59,12 @@ while ($modif) {
 			foreach($depencies as $depency) {
 				$version_max=$depency->version_majeur_max.".".$depency->version_mineur_max;
 				$version_min=$depency->version_majeur_min.".".$depency->version_mineur_min;
-				echo "<!-- Clear $extname ~ ".$depency->name." # [$version_min,$version_max] -->\n";
 				$module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 				$module->module=$depency->name;
 				$module->find();
 				if ($module->fetch()) {
-					$current_version_list=split("\.",$module->version);
+					$current_version_list=explode("\.",$module->version);
 					$current_version=$current_version_list[0].'.'.$current_version_list[1];
-					echo "<!-- ? $extname ".$depency->name." v$current_version # [$version_min,$version_max] -->\n";
 					if (version_compare($current_version,$version_max,'>') || version_compare($current_version,$version_min,'<')) {
 						$other_module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
 						$other_module->module=$extname;
@@ -83,7 +77,6 @@ while ($modif) {
 									$other_version_min=$depend_item[2];
 								}
 							}
-							echo "<!-- ?? $extname ".$depency->name." v$current_version # [$other_version_min,$other_version_max] -->\n";
 							if (version_compare($current_version,$other_version_max,'>') || version_compare($current_version,$other_version_min,'<'))
 								$modif=true;
 						}
@@ -96,7 +89,6 @@ while ($modif) {
 			}
 		}
 	}
-	echo "<!-- CC --> \n";
 }
 //@CODE_ACTION@
 }

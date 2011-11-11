@@ -51,7 +51,6 @@ if(($Rep!==false) && (count($Rep)>0))
 	if (get_class($LIST)!='XmlElement')
 		return false;
 	$Extension_childs = $LIST->getChildsByTagName("MODULE");
-	//echo "<!-- updateserver=$updateserver - Response=$Response - NB=".count($Extension_childs)." -->\n";
 	foreach($Extension_childs as $Extension_child)
 	{
 		$module=$Extension_child->getAttributeValue("module");
@@ -85,7 +84,6 @@ if(($Rep!==false) && (count($Rep)>0))
 					$valid=(version_compare($versDist,$ext->getDBVersion())>0);
 			}
 			$is_new=($ext->getPHPVersion()=='0.0.0.0');
-			//echo "<!-- valid=$valid : module=$module - famille=$famille - versDist=$versDist - version=".$Module_to_update->version." - verext=".$ext->getPHPVersion()." -->\n";
 			if ($valid) {
 				$dir="usr/org_lucterios_updates/";
 				$lpk_file=$dir.$module.".lpk";
