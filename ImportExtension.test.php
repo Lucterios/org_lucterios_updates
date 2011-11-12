@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Test file write by SDK tool
-// --- Last modification: Date 08 March 2011 8:16:47 By  ---
+// --- Last modification: Date 11 November 2011 19:15:16 By  ---
 
 
 //@TABLES@
@@ -112,10 +112,10 @@ $test->assertEquals(null,$comp1,"Next F");
 unset($rep);unset($comp1);
 
 $test->assertEquals(true,is_dir("extensions/PourTest"),"extensions/PourTest");
-$test->assertEquals(true,is_file("extensions/PourTest/config.inc.php"),"config.inc.php");
+$test->assertEquals(true,is_file("extensions/PourTest/config.evt.php"),"config.evt.php");
 $test->assertEquals(true,is_file("extensions/PourTest/postInstall.inc.php"),"postInstall.inc.php");
 $test->assertEquals(true,is_file("extensions/PourTest/setup.inc.php"),"setup.inc.php");
-$test->assertEquals(true,is_file("extensions/PourTest/status.inc.php"),"status.inc.php");
+$test->assertEquals(true,is_file("extensions/PourTest/status.evt.php"),"status.evt.php");
 $test->assertEquals(true,is_dir("extensions/PourTest/images"),"extensions/PourTest/images");
 $test->assertEquals(true,is_file("extensions/PourTest/images/gimp.png"),"gimp.png");
 $test->assertEquals(true,is_file("extensions/PourTest/images/blender.png"),"blender.png");
