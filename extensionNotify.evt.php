@@ -20,13 +20,14 @@
 // library file write by SDK tool
 // --- Last modification: Date 04 July 2011 22:50:42 By  ---
 
-//@BEGIN@
-function org_lucterios_updates_APAS_extensionNotify(&$xfer,$Value) {
+function org_lucterios_updates_APAS_extensionNotify(&$xfer,$Value) 
+{
+//@CODE_ACTION@
 	if ($Value==0) {
 		require_once("extensions/org_lucterios_updates/UpdateServers.tbl.php");
 		$UpdateServer=new DBObj_org_lucterios_updates_UpdateServers;
 		$UpdateServer->clearDateUpdate();
 	}
+//@CODE_ACTION@
 }
-//@END@
 ?>

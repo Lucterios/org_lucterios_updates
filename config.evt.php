@@ -20,12 +20,13 @@
 //  // library file write by SDK tool
 // --- Last modification: Date 01 March 2008 14:24:41 By  ---
 
-//@BEGIN@
 
 function org_lucterios_updates_APAS_config(&$xfer_result)
 {
+//@CODE_ACTION@
+
 // Fonction pour ajouter des composants dans la fenêtre de configuration
+//@CODE_ACTION@
 }
 
-//@END@
 ?>
