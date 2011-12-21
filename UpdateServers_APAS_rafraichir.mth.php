@@ -36,7 +36,7 @@ function UpdateServers_APAS_rafraichir(&$self)
 //@CODE_ACTION@
 $updateserver='http://'.$self->adresse."/actions/liste.php";
 $sec = microtime(true);
-$Rep = file($updateserver);
+$Rep = @file($updateserver);
 $duration = microtime(true)-$sec;
 if(($Rep!==false) && (count($Rep)>0))
 {
