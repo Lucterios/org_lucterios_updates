@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Method file write by SDK tool
-// --- Last modification: Date 08 March 2011 0:16:05 By  ---
+// --- Last modification: Date 28 December 2011 23:33:47 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -63,7 +63,7 @@ while ($modif) {
 				$module->module=$depency->name;
 				$module->find();
 				if ($module->fetch()) {
-					$current_version_list=explode("\.",$module->version);
+					$current_version_list=explode('.',$module->version);
 					$current_version=$current_version_list[0].'.'.$current_version_list[1];
 					if (version_compare($current_version,$version_max,'>') || version_compare($current_version,$version_min,'<')) {
 						$other_module=new DBObj_org_lucterios_updates_ModulesToUpgrade;
