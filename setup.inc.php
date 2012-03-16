@@ -17,7 +17,7 @@
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// setup file write by SDK tool
-// --- Last modification: Date 15 March 2012 7:08:54 By  ---
+// --- Last modification: Date 16 March 2012 5:34:36 By  ---
 
 $extention_name="org_lucterios_updates";
 $extention_description="Modules gérant le téléchargement et l'installation d'autres extensions.{[newline]}Il utilise au mieux plusieurs serveurs de mise à jours et gére les dépendances entre les modules.";
@@ -28,7 +28,7 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=3;
-$version_release=2;
+$version_release=3;
 $version_build=93;
 
 $depencies=array();
