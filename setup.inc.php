@@ -1,23 +1,21 @@
 <?php
-// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// Thanks to have payed a donation for using this module.
 // 
-// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// setup file write by SDK tool
-// --- Last modification: Date 16 March 2012 5:34:36 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// setup file write by Lucterios SDK tool
 
 $extention_name="org_lucterios_updates";
 $extention_description="Modules gérant le téléchargement et l'installation d'autres extensions.{[newline]}Il utilise au mieux plusieurs serveurs de mise à jours et gére les dépendances entre les modules.";
@@ -29,7 +27,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=3;
-$version_build=93;
+$version_build=95;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
@@ -41,7 +39,7 @@ $rights[2] = new Param_Rigth("Mettre à jours/Installer",65);
 $menus=array();
 $menus[0] = new Param_Menu("Mise à jours", "_Extensions (conf.)", "", "", "", 10 , 0, "");
 $menus[1] = new Param_Menu("Serveurs de mise à jours", "Mise à jours", "UpdateServers_APAS_List", "updateParam.png", "", 5 , 1, "Gestion des adresses de serveur de mise à jours.");
-$menus[2] = new Param_Menu("_Mise à jours et Installation", "Ad_ministration", "ModulesToUpgrade_APAS_SelectionUpgrade", "update.png", "ctrl alt shift I", 10 , 1, "Téléchargement des dernières mises à jour de votre logiciel.");
+$menus[2] = new Param_Menu("_Mise à jours et Installation", "_Général", "ModulesToUpgrade_APAS_SelectionUpgrade", "update.png", "ctrl alt shift I", 80 , 1, "Téléchargement des dernières mises à jour de votre logiciel.");
 
 $actions=array();
 $actions[0] = new Param_Action("Module à télécharger", "ModulesToUpgrade_APAS_ATelecharger", 2);
