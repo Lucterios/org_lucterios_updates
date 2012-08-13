@@ -27,10 +27,10 @@ $extension_libre=true;
 $version_max=1;
 $version_min=4;
 $version_release=1;
-$version_build=95;
+$version_build=96;
 
 $depencies=array();
-$depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
+$depencies[0] = new Param_Depencies("CORE", 1, 4, 1, 3, false);
 
 $rights=array();
 $rights[1] = new Param_Rigth("Paramètrage",85);
