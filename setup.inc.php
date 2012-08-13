@@ -25,8 +25,8 @@ $extention_titre="Mise à jours & installation de modules";
 $extension_libre=true;
 
 $version_max=1;
-$version_min=3;
-$version_release=3;
+$version_min=4;
+$version_release=1;
 $version_build=95;
 
 $depencies=array();
