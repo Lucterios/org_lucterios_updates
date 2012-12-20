@@ -26,8 +26,8 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=4;
-$version_release=2;
-$version_build=109;
+$version_release=3;
+$version_build=114;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 4, 1, 3, false);
@@ -45,11 +45,11 @@ $actions=array();
 $actions[0] = new Param_Action("Module à télécharger", "ModulesToUpgrade_APAS_ATelecharger", 2);
 $actions[1] = new Param_Action("Supprimer un module à mettre à jour", "ModulesToUpgrade_APAS_Del", 2);
 $actions[2] = new Param_Action("Fiche d'un module à mettre à jour", "ModulesToUpgrade_APAS_Fiche", 2);
-$actions[3] = new Param_Action("Cycle d installation des mise a jour", "ModulesToUpgrade_APAS_Installation", 2);
+$actions[3] = new Param_Action("Cycle d`installation des mises à jour", "ModulesToUpgrade_APAS_Installation", 2);
 $actions[4] = new Param_Action("Installer les module télécharger", "ModulesToUpgrade_APAS_Installer", 2);
 $actions[5] = new Param_Action("Lister des modules à mettre à jour", "ModulesToUpgrade_APAS_List", 2);
 $actions[6] = new Param_Action("Rafraichir la liste des modules à mettre à jour", "ModulesToUpgrade_APAS_Rafraichir", 2);
-$actions[7] = new Param_Action("Sélectionnez les mises à jour", "ModulesToUpgrade_APAS_SelectionUpgrade", 2);
+$actions[7] = new Param_Action("Sélectionner les mises à jour", "ModulesToUpgrade_APAS_SelectionUpgrade", 2);
 $actions[8] = new Param_Action("Téléchargement des modules", "ModulesToUpgrade_APAS_Telechargement", 2);
 $actions[9] = new Param_Action("Valider un serveur de mise à jour", "UpdateServers_APAS_AddModifyAct", 1);
 $actions[10] = new Param_Action("Ajouter/Modifier un serveur de mise à jour", "UpdateServers_APAS_AddModify", 1);

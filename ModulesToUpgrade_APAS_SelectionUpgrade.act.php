@@ -28,7 +28,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Sélectionnez les mises à jour
+//@DESC@Sélectionner les mises à jour
 //@PARAM@ 
 
 
@@ -39,7 +39,7 @@ function ModulesToUpgrade_APAS_SelectionUpgrade($Params)
 $self=new DBObj_org_lucterios_updates_ModulesToUpgrade();
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_SelectionUpgrade",$Params);
-$xfer_result->Caption="Sélectionnez les mises à jour";
+$xfer_result->Caption="Sélectionner les mises à jour";
 //@CODE_ACTION@
 global $SECURITY_LOCK;
 $SECURITY_LOCK->open(true);
@@ -74,7 +74,7 @@ if ($res) {
 			{
 				$Current_Nouveau=$module->nouveau;
 				if ($Current_Nouveau=='n')
-					$xfer_result->newTab("Modules à mettre à jours");
+					$xfer_result->newTab("Modules à mettre à jour");
 				else
 					$xfer_result->newTab("Nouveaux modules");
 			}
@@ -146,7 +146,7 @@ else
 {
 	$lbl=new Xfer_Comp_LabelForm("Erreur");
 	$lbl->setLocation(0,$PosY+1,4);
-	$lbl->setValue("{[center]}Aucun serveur de mise à jours de réponds.{[newline]}Vérifiez votre connexion réseau et vos paramétrages.{[/center]}");
+	$lbl->setValue("{[center]}Aucun serveur de mise à jour ne répond.{[newline]}Vérifiez votre connexion réseau et vos paramétrages.{[/center]}");
 	$xfer_result->addComponent($lbl);
 }
 $xfer_result->addAction(new Xfer_Action("_Annuler", "close.png"));
