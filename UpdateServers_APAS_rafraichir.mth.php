@@ -42,7 +42,8 @@ $ext->extensionId='CORE';
 $ext->find();
 $ext->fetch();
 
-$updateserver='http://'.$self->adresse."/actions/liste.php?GUID=$guid&CORE=".urlencode($ext->getversion())."&OS=".urlencode(php_uname("s v m"));
+$os_version=php_uname("s").' '.php_uname("r").' '.php_uname("m");
+$updateserver='http://'.$self->adresse."/actions/liste.php?GUID=$guid&CORE=".urlencode($ext->getversion())."&OS=".urlencode($os_version);
 $sec = microtime(true);
 $Rep = @file($updateserver);
 $duration = microtime(true)-$sec;
