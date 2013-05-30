@@ -1,24 +1,21 @@
 <?php
-// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// 	Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-// Test file write by SDK tool
-// --- Last modification: Date 11 November 2011 19:15:16 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Test file write by Lucterios SDK tool
 
 
 //@TABLES@
@@ -54,13 +51,13 @@ $comp2=$rep->getComponents("actif");
 $test->assertClass("xfer_comp_check",$comp2,"actif");
 unset($rep);unset($comp1);unset($comp2);
 
-$rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_AddModifyAct",array('adresse'=>'projets.lucterios.org/lucteriosUpdates','actif'=>'o'),"Xfer_Container_Acknowledge");
+$rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_AddModifyAct",array('adresse'=>'projets.lucterios.org/updates','actif'=>'o'),"Xfer_Container_Acknowledge");
 unset($rep);
 
 $rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_List",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("UpdateServers");
 $test->assertEquals(2,count($comp1->m_records),"records");
-$test->assertEquals("projets.lucterios.org/lucteriosUpdates",$comp1->m_records["100"]["adresse"]);
+$test->assertEquals("projets.lucterios.org/updates",$comp1->m_records["100"]["adresse"]);
 $test->assertEquals("Oui",$comp1->m_records["100"]["actif"]);
 unset($rep);unset($comp1);
 
@@ -125,7 +122,7 @@ $test->assertEquals(true,is_file("extensions/PourTest/help/help.xhlp"),"help.xhl
 $test->assertEquals(true,is_file("extensions/PourTest/help/menu.hlp.php"),"menu.hlp.php");
 $test->assertEquals(true,is_file("extensions/PourTest/help/presence_online.png"),"presence_online.png");
 
-$rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_Del",array('CONFIRME'=>'YES','UpdateServers'=>100),"Xfer_Container_Acknowledge");
+$rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_Del",array('CONFIRME'=>'YES','UpdateServers'=>'100'),"Xfer_Container_Acknowledge");
 $rep=$test->CallAction("org_lucterios_updates","UpdateServers_APAS_List",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("UpdateServers");
 $test->assertEquals(1,count($comp1->m_records),"records");
