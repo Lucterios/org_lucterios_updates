@@ -71,7 +71,8 @@ if(($Rep!==false) && (count($Rep)>0))
 		require_once "CORE/extensionManager.inc.php";
 		$dir=Extension::getFolder($extname,"",$famille=="client");
 		$ext=new Extension($extname,$dir);
-		if ((($famille!="applis") || ($ext->Appli==$module)) && !is_dir($dir.'/.git') &&  (($module!='SDK') || (exec('git --version')!='') ))
+		exec('git --version',$gitval,$gitret);
+		if ((($famille!="applis") || ($ext->Appli==$module)) && !is_dir($dir.'/.git') &&  (($module!='SDK') || ($gitret==0) ))
 		{
 			$vmax=$Extension_child->getAttributeValue("vmax");
 			$vmin=$Extension_child->getAttributeValue("vmin");
