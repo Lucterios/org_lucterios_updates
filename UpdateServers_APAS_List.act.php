@@ -38,7 +38,7 @@ function UpdateServers_APAS_List($Params)
 {
 $self=new DBObj_org_lucterios_updates_UpdateServers();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","UpdateServers_APAS_List",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_updates","UpdateServers_APAS_List",$Params);
 $xfer_result->Caption="Serveurs de mise à jour";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");

@@ -41,7 +41,7 @@ function ModulesToUpgrade_APAS_Installer($Params)
 {
 $self=new DBObj_org_lucterios_updates_ModulesToUpgrade();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_Installer",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_Installer",$Params);
 $xfer_result->Caption="Installer les module télécharger";
 //@CODE_ACTION@
 global $SECURITY_LOCK;

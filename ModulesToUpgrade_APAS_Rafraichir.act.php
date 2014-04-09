@@ -39,7 +39,7 @@ function ModulesToUpgrade_APAS_Rafraichir($Params)
 {
 $self=new DBObj_org_lucterios_updates_ModulesToUpgrade();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_Rafraichir",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_Rafraichir",$Params);
 $xfer_result->Caption="Rafraichir la liste des modules à mettre à jour";
 //@CODE_ACTION@
 $self->refresh();

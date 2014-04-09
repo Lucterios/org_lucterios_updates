@@ -47,7 +47,7 @@ $self->lockRecord("UpdateServers_APAS_Del");
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_updates","UpdateServers_APAS_Del",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_updates","UpdateServers_APAS_Del",$Params);
 $xfer_result->Caption="Supprimer un serveur de mise à jour";
 $xfer_result->m_context['ORIGINE']="UpdateServers_APAS_Del";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

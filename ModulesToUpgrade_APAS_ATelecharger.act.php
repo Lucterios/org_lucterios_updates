@@ -50,7 +50,7 @@ $self->lockRecord("ModulesToUpgrade_APAS_ATelecharger");
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_ATelecharger",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_updates","ModulesToUpgrade_APAS_ATelecharger",$Params);
 $xfer_result->Caption="Module à télécharger";
 //@CODE_ACTION@
 if (($self->etat==0) || ($self->etat==3))

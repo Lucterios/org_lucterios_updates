@@ -38,7 +38,7 @@ function ModulesToUpgrade_APAS_List($Params)
 {
 $self=new DBObj_org_lucterios_updates_ModulesToUpgrade();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_List",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_List",$Params);
 $xfer_result->Caption="Lister des modules à mettre à jour";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");

@@ -38,7 +38,7 @@ function ModulesToUpgrade_APAS_SelectionUpgrade($Params)
 {
 $self=new DBObj_org_lucterios_updates_ModulesToUpgrade();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_SelectionUpgrade",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_SelectionUpgrade",$Params);
 $xfer_result->Caption="Sélectionner les mises à jour";
 //@CODE_ACTION@
 global $SECURITY_LOCK;

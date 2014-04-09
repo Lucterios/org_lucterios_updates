@@ -44,7 +44,7 @@ $erreur=getParams($Params,"erreur",0);
 $status=getParams($Params,"status",0);
 $self=new DBObj_org_lucterios_updates_ModulesToUpgrade();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_Installation",$Params);
 $xfer_result->Caption="Cycle d`installation des mises à jour";
 //@CODE_ACTION@
 global $SECURITY_LOCK;

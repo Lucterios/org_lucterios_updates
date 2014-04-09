@@ -43,7 +43,7 @@ if ($module>=0) $self->get($module);
 
 $self->lockRecord("ModulesToUpgrade_APAS_Fiche");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_Fiche",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_updates","ModulesToUpgrade_APAS_Fiche",$Params);
 $xfer_result->Caption="Fiche d'un module à mettre à jour";
 $xfer_result->m_context['ORIGINE']="ModulesToUpgrade_APAS_Fiche";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
